@@ -1,0 +1,12 @@
+.buttons {
+    display:flex;
+    justify-content: center;
+    border-bottom:2px solid black;
+}
+
+.buttons button {
+    width:auto;
+    padding:5px;
+    box-sizing: border-box;
+    height:30px;
+}

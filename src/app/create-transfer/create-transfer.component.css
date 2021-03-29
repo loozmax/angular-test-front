@@ -1,0 +1,42 @@
+form .container {
+    display:flex;
+    justify-content: space-around;
+    margin-top:20px;
+}
+
+form .bottom {
+    display:flex;
+    justify-content: center;
+    margin-top:50px;
+}
+
+.container__usercard,
+.container__sendcard {
+    width:400px;
+    height:200px;
+    border:1px solid black;
+}
+
+.container__data {
+    display:flex;
+}
+
+input[data='data-fio'] {
+    width:240px;
+}
+
+input[data='data-year'],
+input[data='data-month'] {
+    width:70px;
+    height:20px;
+}
+
+input[data='data-card-number'] {
+    width:98%;
+    height:30px;
+    margin-bottom:10px;
+}
+
+h2 {
+    text-align:center;
+}

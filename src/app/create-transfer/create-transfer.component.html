@@ -1,0 +1,23 @@
+<form>
+    <div class='container'>
+        <div class='container__usercard'>
+            <h2>Карта плательщика</h2>
+            <input required type='text' placeholder='Номер карты' data='data-card-number'>
+            <div class='container__data'>
+                <input required type='text' placeholder='ФИО держателя' data='data-fio'>
+                <input required type='number' placeholder='месяц' data='data-month'>
+                <input required type='number' placeholder='год' data='data-year'>
+            </div>
+
+        </div>
+        <div class='container__sendcard'>
+            <h2>Карта получателя</h2>
+            <input required type='text' placeholder='Номер карты' data='data-card-number'>
+        </div>
+    </div>
+    <div class='bottom'>
+        <input required type='number' class='bottom__sum' placeholder='Сумма'>
+        <input type='hidden' value={{date}}>
+        <input type='submit' value='Перевести'>
+    </div>    
+</form>
