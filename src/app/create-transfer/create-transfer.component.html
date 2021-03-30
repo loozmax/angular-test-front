@@ -1,11 +1,11 @@
-<form #myForm="ngForm">
+<form [formGroup]="myForm" (ngSubmit)="submit()">
     <div class='container'>
         <div class='container__usercard'>
             <h2>Карта плательщика</h2>
-            <input placeholder="номер карты без пробелов (16 цифр)" pattern='[0-9]{16}' required type='text' data='data-card-number' [(ngModel)] = 'cardNumber' name="cardNumber" > 
+            <input placeholder="номер карты без пробелов (16 цифр)" type='text' data='data-card-number' formControlName="cardWhoPay" > 
             <div class='container__data'>
-                <input required type='text' pattern='^[А-Яа-яЁё\s]+$' placeholder='ФИО держателя' data='data-fio' [(ngModel)] = 'nameAndSurname' name='name'>
-                <select required [(ngModel)] = 'activeMonth' name='month'>
+                <input required type='text' placeholder='ФИО держателя' data='data-fio' formControlName="FIO" >
+                <select formControlName="month" name='month'>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -19,7 +19,7 @@
                     <option>11</option>
                     <option>12</option>
                 </select>
-                <select required [(ngModel)] = 'activeYear' name='year'>
+                <select formControlName="year" name='year'>
                     <option>2021</option>
                     <option>2022</option>
                     <option>2023</option>
@@ -31,12 +31,12 @@
         </div>
         <div class='container__sendcard'>
             <h2>Карта получателя</h2>
-            <input required type='text' pattern='[0-9]{16}' placeholder="номер карты без пробелов"  data='data-card-number' [(ngModel)] = 'cardUserNumber' name='usercard'>
+            <input type='text' placeholder="номер карты без пробелов"  data='data-card-number'  formControlName="usercard">
         </div>
     </div>
     <div class='bottom'>
-        <input #month='ngModel' required type='number' class='bottom__sum' pattern='\d+(\.\d{2})?' placeholder='Сумма' name='sum' [(ngModel)] = 'sum' >
-        <input type='hidden' name='dateNow' ([ngModel]) = 'dateNow'>
-        <input [disabled] = 'myForm.invalid' type='submit' value='Перевести' (click)="submit(myForm)">
+        <input type='number' class='bottom__sum' placeholder='Сумма' formControlName="sum">
+        <input type='hidden' formControlName="dateNow">
+        <input type='submit' [disabled] = 'myForm.invalid' value='Перевести'>
     </div>    
 </form>

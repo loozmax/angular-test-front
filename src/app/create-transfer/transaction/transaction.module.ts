@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CreateTransferComponent } from '../create-transfer.component';
 import { TransactionRoutingModule } from './transaction.routing';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [CreateTransferComponent],
@@ -12,7 +12,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     TransactionRoutingModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 

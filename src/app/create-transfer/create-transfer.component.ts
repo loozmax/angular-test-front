@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import {Router} from '@angular/router';
 
 
@@ -10,23 +10,22 @@ import {Router} from '@angular/router';
 })
 
 export class CreateTransferComponent implements OnInit {
-
-
   dateNow = new Date();
   repeat: any[] = [];
-  cardNumber: string = '';
-  nameAndSurname: string = '';
-  activeMonth: number = 0;
-  activeYear: number = 0;
-  sum: number = NaN;
-  cardUserNumber: string = '';
   obj: any[] = [];
-  // allFieldsAreCorrect = false;
 
   constructor(private router: Router) { }
+  myForm : FormGroup = new FormGroup({      
+    "cardWhoPay": new FormControl('', [Validators.required, Validators.pattern('[0-9]{16}')]),
+    "FIO": new FormControl("", [Validators.required, Validators.pattern('^[А-Яа-яЁё\s]+$')]),
+    "month": new FormControl(1, [Validators.required]),
+    "year": new FormControl(2021, Validators.required),
+    "usercard": new FormControl("", [Validators.required, Validators.pattern('[0-9]{16}')]),
+    "sum": new FormControl("", [Validators.required, Validators.pattern('^[0-9]*[.]?[0-9]+$')]),
+    "dateNow": new FormControl(this.dateNow)
+  });
 
-
-  submit(form: NgForm) {
+  submit() {
     if (localStorage.getItem('date')) {
       this.obj = JSON.parse(localStorage.getItem('date')!);
     }
@@ -35,18 +34,17 @@ export class CreateTransferComponent implements OnInit {
     }
     this.router.navigate(['history']);
 
-
     this.obj.push({
-      "cardWhoPay" : form.value.cardNumber,
-      'FIO': form.value.name,
-      'month': form.value.month,
-      'year': form.value.year,
-      'cardUser': form.value.usercard,
-      'sum': form.value.sum,
+      "cardWhoPay" : this.myForm.value.cardWhoPay,
+      'FIO': this.myForm.value.FIO,
+      'month': this.myForm.value.month,
+      'year': this.myForm.value.year,
+      'cardUser': this.myForm.value.usercard,
+      'sum': this.myForm.value.sum,
       'dateNow' : `${this.dateNow.getDate()}-${this.dateNow.getMonth()}-${this.dateNow.getFullYear()}`,
       'index': this.obj.length + 1,
-      'spliceCardNumberWhoPay' : `${form.value.cardNumber.slice(0, 4)} **** **** ${form.value.cardNumber.slice(10, 14)}`,
-      'sliceCardUserNumber' : `${form.value.usercard.slice(0, 4)} **** **** ${form.value.usercard.slice(10, 14)}`
+      'spliceCardNumberWhoPay' : `${this.myForm.value.cardWhoPay.slice(0, 4)} **** **** ${this.myForm.value.cardWhoPay.slice(10, 14)}`,
+      'sliceCardUserNumber' : `${this.myForm.value.usercard.slice(0, 4)} **** **** ${this.myForm.value.usercard.slice(10, 14)}`
     })
 
     localStorage.setItem('date', JSON.stringify(this.obj));
@@ -54,17 +52,13 @@ export class CreateTransferComponent implements OnInit {
 
   ngOnInit(): void {
     this.repeat = JSON.parse(localStorage.getItem('repeat')!);
-    console.log(this.repeat[0].month);
-    if (this.repeat[0]) {
-      this.activeMonth = this.repeat[0].month;
-      this.activeYear = this.repeat[0].year;
-      this.sum = this.repeat[0].sum;
-      this.cardNumber = this.repeat[0].cardWhoPay;
-      this.cardUserNumber = this.repeat[0].cardUser;
-      this.nameAndSurname = this.repeat[0].FIO;
+    if (this.repeat) {
+      this.myForm.controls['month'].setValue(this.repeat[0].month);
+      this.myForm.controls['year'].setValue(this.repeat[0].year);
+      this.myForm.controls['sum'].setValue(this.repeat[0].sum);
+      this.myForm.controls['cardWhoPay'].setValue(this.repeat[0].cardWhoPay);
+      this.myForm.controls['usercard'].setValue(this.repeat[0].cardUser);
+      this.myForm.controls['FIO'].setValue(this.repeat[0].FIO);
     }
   }
-
-  
-
 }
