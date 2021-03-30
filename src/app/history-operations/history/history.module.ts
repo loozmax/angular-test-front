@@ -5,7 +5,9 @@ import { HistoryRoutingModule } from './history.routing';
 import { HistoryOperationsComponent } from '../history-operations.component';
 
 @NgModule({
-  declarations: [HistoryOperationsComponent],
+  declarations: [
+    HistoryOperationsComponent
+  ],
   exports: [HistoryOperationsComponent],
   imports: [
     CommonModule,

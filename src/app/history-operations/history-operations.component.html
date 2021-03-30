@@ -7,4 +7,15 @@
         <td>Дата выполнения</td>
         <td>Действие</td>
     </tr>
+    <tr *ngFor='let user of date'>
+        <td>{{ user['index'] }}</td>
+        <td>{{ user['cardWhoPay']}}</td>
+        <td>{{ user['cardUser']}}</td>
+        <td>{{ user['sum']}}</td>
+        <td>{{ user['dateNow']}}</td>
+        <td class='action'>
+            <button>Повторить</button>
+            <button>Удалить</button>
+        </td>
+    </tr>
 </table>

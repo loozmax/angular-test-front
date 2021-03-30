@@ -1,23 +1,23 @@
-<form>
+<form #myForm="ngForm">
     <div class='container'>
         <div class='container__usercard'>
             <h2>Карта плательщика</h2>
-            <input required type='text' placeholder='Номер карты' data='data-card-number'>
+            <input required type='text' placeholder='Номер карты' data='data-card-number' [(ngModel)] = 'cardNumber' name="cardNumber" > 
             <div class='container__data'>
-                <input required type='text' placeholder='ФИО держателя' data='data-fio'>
-                <input required type='number' placeholder='месяц' data='data-month'>
-                <input required type='number' placeholder='год' data='data-year'>
+                <input required type='text' placeholder='ФИО держателя' data='data-fio' [(ngModel)] = 'nameAndSurname' name='name'>
+                <input required type='number' placeholder='месяц' data='data-month' [(ngModel)] = 'activeMonth' name='month'>
+                <input required type='number' placeholder='год' data='data-year' [(ngModel)] = 'activeYear' name='year'>
             </div>
 
         </div>
         <div class='container__sendcard'>
             <h2>Карта получателя</h2>
-            <input required type='text' placeholder='Номер карты' data='data-card-number'>
+            <input required type='text' placeholder='Номер карты' data='data-card-number' [(ngModel)] = 'cardUserNumber' name='usercard'>
         </div>
     </div>
     <div class='bottom'>
-        <input required type='number' class='bottom__sum' placeholder='Сумма'>
-        <input type='hidden' value={{date}}>
-        <input type='submit' value='Перевести'>
+        <input required type='number' class='bottom__sum' placeholder='Сумма' name='sum' [(ngModel)] = 'sum' >
+        <input type='hidden' name='dateNow' ([ngModel]) = 'dateNow'>
+        <input type='submit' value='Перевести' (click)="submit(myForm)">
     </div>    
 </form>
