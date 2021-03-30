@@ -11,7 +11,6 @@ import {Router} from '@angular/router';
 
 export class CreateTransferComponent implements OnInit {
 
-  constructor(private router: Router) { }
 
   dateNow = new Date();
   repeat: any[] = [];
@@ -19,11 +18,13 @@ export class CreateTransferComponent implements OnInit {
   nameAndSurname: string = '';
   activeMonth: number = 0;
   activeYear: number = 0;
-  sum: number = 0;
+  sum: number = NaN;
   cardUserNumber: string = '';
   obj: any[] = [];
+  // allFieldsAreCorrect = false;
 
-  
+  constructor(private router: Router) { }
+
 
   submit(form: NgForm) {
     if (localStorage.getItem('date')) {
@@ -33,6 +34,7 @@ export class CreateTransferComponent implements OnInit {
       localStorage.removeItem('repeat');
     }
     this.router.navigate(['history']);
+
 
     this.obj.push({
       "cardWhoPay" : form.value.cardNumber,

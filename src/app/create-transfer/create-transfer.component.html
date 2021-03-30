@@ -2,22 +2,41 @@
     <div class='container'>
         <div class='container__usercard'>
             <h2>Карта плательщика</h2>
-            <input required type='text' placeholder='Номер карты' data='data-card-number' [(ngModel)] = 'cardNumber' name="cardNumber" > 
+            <input placeholder="номер карты без пробелов (16 цифр)" pattern='[0-9]{16}' required type='text' data='data-card-number' [(ngModel)] = 'cardNumber' name="cardNumber" > 
             <div class='container__data'>
-                <input required type='text' placeholder='ФИО держателя' data='data-fio' [(ngModel)] = 'nameAndSurname' name='name'>
-                <input required type='number' placeholder='месяц' data='data-month' [(ngModel)] = 'activeMonth' name='month'>
-                <input required type='number' placeholder='год' data='data-year' [(ngModel)] = 'activeYear' name='year'>
+                <input required type='text' pattern='^[А-Яа-яЁё\s]+$' placeholder='ФИО держателя' data='data-fio' [(ngModel)] = 'nameAndSurname' name='name'>
+                <select required [(ngModel)] = 'activeMonth' name='month'>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                </select>
+                <select required [(ngModel)] = 'activeYear' name='year'>
+                    <option>2021</option>
+                    <option>2022</option>
+                    <option>2023</option>
+                    <option>2024</option>
+                    <option>2025</option>
+                    <option>2026</option>
+                </select>
             </div>
-
         </div>
         <div class='container__sendcard'>
             <h2>Карта получателя</h2>
-            <input required type='text' placeholder='Номер карты' data='data-card-number' [(ngModel)] = 'cardUserNumber' name='usercard'>
+            <input required type='text' pattern='[0-9]{16}' placeholder="номер карты без пробелов"  data='data-card-number' [(ngModel)] = 'cardUserNumber' name='usercard'>
         </div>
     </div>
     <div class='bottom'>
-        <input required type='number' class='bottom__sum' placeholder='Сумма' name='sum' [(ngModel)] = 'sum' >
+        <input #month='ngModel' required type='number' class='bottom__sum' pattern='\d+(\.\d{2})?' placeholder='Сумма' name='sum' [(ngModel)] = 'sum' >
         <input type='hidden' name='dateNow' ([ngModel]) = 'dateNow'>
-        <input type='submit' value='Перевести' (click)="submit(myForm)">
+        <input [disabled] = 'myForm.invalid' type='submit' value='Перевести' (click)="submit(myForm)">
     </div>    
 </form>
