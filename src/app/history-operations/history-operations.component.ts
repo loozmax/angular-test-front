@@ -15,4 +15,8 @@ export class HistoryOperationsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deleteItem() {
+    
+  }
+
 }

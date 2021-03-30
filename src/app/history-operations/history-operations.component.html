@@ -9,13 +9,13 @@
     </tr>
     <tr *ngFor='let user of date'>
         <td>{{ user['index'] }}</td>
-        <td>{{ user['cardWhoPay']}}</td>
-        <td>{{ user['cardUser']}}</td>
+        <td>{{ user['spliceCardNumberWhoPay']}}</td>
+        <td>{{ user['sliceCardUserNumber']}}</td>
         <td>{{ user['sum']}}</td>
         <td>{{ user['dateNow']}}</td>
         <td class='action'>
             <button>Повторить</button>
-            <button>Удалить</button>
+            <button (click) = 'deleteItem()'>Удалить</button>
         </td>
     </tr>
 </table>
