@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HistoryRoutingModule } from './history.routing';
 import { HistoryOperationsComponent } from '../history-operations.component';
+import { LocalstorageService } from 'src/app/localstorage.service';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { HistoryOperationsComponent } from '../history-operations.component';
     CommonModule,
     RouterModule,
     HistoryRoutingModule
-  ]
+  ],
+  providers: [LocalstorageService]
 })
 export class HistoryModule { }

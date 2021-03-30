@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import { LocalstorageService } from '../localstorage.service';
 
 
 @Component({
@@ -11,22 +12,20 @@ export class HistoryOperationsComponent implements OnInit {
   date = [];
   repeatObj = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private svc: LocalstorageService) { }
 
   ngOnInit(): void {
-    this.date = JSON.parse(localStorage.getItem('date')!);
+    this.date = this.svc.getAllData();
   }
 
   deleteItem(id:number) {
-    console.log(id);
     let result:any = this.date.splice(id - 1, 1);
-    localStorage.setItem('date', JSON.stringify(this.date));
+    this.svc.afterDelete(this.date);
   }
 
   repeat(id:number) {
     this.repeatObj.push(this.date[id - 1]);
-    localStorage.setItem('repeat', JSON.stringify(this.repeatObj));
-
+    this.svc.pushInLocalStorageRepeatItem(this.repeatObj);
     this.router.navigate(['']);
   }
 
