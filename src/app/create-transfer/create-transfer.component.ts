@@ -13,13 +13,15 @@ export class CreateTransferComponent implements OnInit {
   dateNow = new Date();
   repeat: any[] = [];
   obj: any[] = [];
+  months: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  years: any = [2021, 2022, 2023, 2024, 2025, 2026];
 
   constructor(private router: Router) { }
   myForm : FormGroup = new FormGroup({      
     "cardWhoPay": new FormControl('', [Validators.required, Validators.pattern('[0-9]{16}')]),
     "FIO": new FormControl("", [Validators.required, Validators.pattern('^[А-Яа-яЁё\s]+$')]),
-    "month": new FormControl(1, [Validators.required]),
-    "year": new FormControl(2021, Validators.required),
+    "month": new FormControl(this.months[0], [Validators.required]),
+    "year": new FormControl(this.years[0], Validators.required),
     "usercard": new FormControl("", [Validators.required, Validators.pattern('[0-9]{16}')]),
     "sum": new FormControl("", [Validators.required, Validators.pattern('^[0-9]*[.]?[0-9]+$')]),
     "dateNow": new FormControl(this.dateNow)

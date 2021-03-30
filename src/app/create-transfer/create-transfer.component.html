@@ -6,26 +6,10 @@
             <div class='container__data'>
                 <input required type='text' placeholder='ФИО держателя' data='data-fio' formControlName="FIO" >
                 <select formControlName="month" name='month'>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
+                    <option *ngFor='let num of months' [ngValue] = 'num'>{{ num }}</option>
                 </select>
                 <select formControlName="year" name='year'>
-                    <option>2021</option>
-                    <option>2022</option>
-                    <option>2023</option>
-                    <option>2024</option>
-                    <option>2025</option>
-                    <option>2026</option>
+                    <option *ngFor='let year of years' [ngValue] = 'year'>{{ year }}</option>
                 </select>
             </div>
         </div>
