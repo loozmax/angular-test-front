@@ -7,15 +7,15 @@
         <td>Дата выполнения</td>
         <td>Действие</td>
     </tr>
-    <tr *ngFor='let user of date'>
-        <td>{{ user['index'] }}</td>
+    <tr *ngFor='let user of date; let i = index'>
+        <td>{{ i + 1 }}</td>
         <td>{{ user['spliceCardNumberWhoPay']}}</td>
         <td>{{ user['sliceCardUserNumber']}}</td>
         <td>{{ user['sum']}}</td>
         <td>{{ user['dateNow']}}</td>
         <td class='action'>
-            <button>Повторить</button>
-            <button (click) = 'deleteItem()'>Удалить</button>
+            <button (click) = 'repeat(i + 1)'>Повторить</button>
+            <button (click) = 'deleteItem(i + 1)'>Удалить</button>
         </td>
     </tr>
 </table>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-create-transfer',
@@ -9,8 +11,10 @@ import { NgForm } from '@angular/forms';
 
 export class CreateTransferComponent implements OnInit {
 
-  dateNow = new Date();
+  constructor(private router: Router) { }
 
+  dateNow = new Date();
+  repeat: any[] = [];
   cardNumber: string = '';
   nameAndSurname: string = '';
   activeMonth: number = 0;
@@ -20,10 +24,15 @@ export class CreateTransferComponent implements OnInit {
   obj: any[] = [];
 
   
+
   submit(form: NgForm) {
     if (localStorage.getItem('date')) {
       this.obj = JSON.parse(localStorage.getItem('date')!);
     }
+    if (localStorage.getItem('repeat')) {
+      localStorage.removeItem('repeat');
+    }
+    this.router.navigate(['history']);
 
     this.obj.push({
       "cardWhoPay" : form.value.cardNumber,
@@ -42,6 +51,16 @@ export class CreateTransferComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.repeat = JSON.parse(localStorage.getItem('repeat')!);
+    console.log(this.repeat[0].month);
+    if (this.repeat[0]) {
+      this.activeMonth = this.repeat[0].month;
+      this.activeYear = this.repeat[0].year;
+      this.sum = this.repeat[0].sum;
+      this.cardNumber = this.repeat[0].cardWhoPay;
+      this.cardUserNumber = this.repeat[0].cardUser;
+      this.nameAndSurname = this.repeat[0].FIO;
+    }
   }
 
   
